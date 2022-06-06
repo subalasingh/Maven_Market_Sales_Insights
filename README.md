@@ -17,11 +17,15 @@
 # 🧙‍♂️ Result
 
  ## Final Output
-yet to come .
+Hooray! Finally, this is what final output looks like:
+
+### ➡️ **Maven Market sales Dashboard**
+
+![Maven_Market_Sales_Insights](https://user-images.githubusercontent.com/90029373/172123828-1c7a02e5-9ebb-4ae0-b920-9df19429b8c4.png)
 
 # 👏 Support
 
 Give a ⭐️ if you like this project!
 ___________________________________
 
-<p>&copy; 2021 Subala Singh</p>
+<p>&copy; 2022 Subala Singh</p>
