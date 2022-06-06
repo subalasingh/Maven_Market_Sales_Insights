@@ -84,9 +84,9 @@ Designed an interactive report to analyze and visualize the data.
     - Filter context flows "downstream" from lookup tables to data tables.
     - Data tables are connected via shared lookup tables (not directly to each other)
 
-3. Hide all foreign keys in both data tables from Report View, as well as "region_id" from the Stores table
+3. `Hide all foreign keys in both data tables from Report View, as well as "region_id" from the Stores table`
 
-4. In the DATA view, completed the following:
+4. `In the DATA view, completed the following:`
     - Updated all date fields (across all tables) to the "M/d/yyyy" format using the formatting tools in the Modeling tab.
     - Updated "product_retail_price", "product_cost", and "discount_price" to Currency ($ English) format.
     - In the Customers table, categorize "customer_city" as City, "customer_postal_code" as Postal Code, and "customer_country" as Country/Region.
@@ -100,3 +100,23 @@ Designed an interactive report to analyze and visualize the data.
       - Equals "Y" for Saturdays or Sundays (otherwise "N")  --> `Weekend = IF(OR('Calendar'[Day Name] = "Sunday",'Calendar'[Day Name] = "Saturday"),"Y","N")`
    - In the Calendar table, added a column named "End of Month"
       - Returns the last date of the current month for each row --> `End of Month = ENDOFMONTH('Calendar'[date])`
+   - In the Customers table, added a column named "Current Age"
+      - Calculates current customer ages using the "birthdate" column and the TODAY() function --> `Current Age = DateDiff(Customers[birthdate],Today(),year)`
+   - In the Customers table, added a column named "Priority"
+      - Equals "High" for customers who own homes and have Golden membership cards (otherwise "Standard") -->`Priority = IF(AND(Customers[homeowner] =    "Y",Customers[member_card] = "Golden"),"High","Standard")`
+   - In the Customers table, added a column named "Short_Country"
+      - Returns the first three characters of the customer country, and converts to all uppercase --> `Short_Country = UPPER(LEFT(Customers[customer_country],3))`
+   - In the Customers table, added a column named "House Number"
+      - Extracts all characters/numbers before the first space in the "customer_address" column --> `House Number = LEFT(Customers[customer_address],Search(" ",Customers[customer_address])-1)`
+   - In the Products table, added a column named "Price_Tier"
+      - Equals "High" if the retail price is >$3, "Mid" if the retail price is >$1, and "Low" otherwise --> `Price_Tier = IF(Products[product_retail_price]>3,"High",IF(Products[product_retail_price]>1,"Mid","Low"))`
+   - In the Stores table, added a column named "Years_Since_Remodel"
+      - Calculates the number of years between the current date (TODAY()) and the last remodel date --> `Years_Since_Remodel = DATEDIFF(Stores[last_remodel_date], TODAY(),YEAR)`
+
+2. `In the REPORT view, added the following measures.`
+
+   - Created new measures named "Quantity Sold" and "Quantity Returned" to calculate the sum of quantity from each data table.
+      - `Quantity Sold = SUM('MavenMarket Transactions'[quantity])` `Quantity Returned = SUM(Return_Data[quantity])`
+   - Created new measures named "Total Transactions" and "Total Returns" to calculate the count of rows from each data table.
+      - `Total Transactions = Countrows(MavenMarket Transactions)` `Total Returns = Countrows(Return_Data)`
+   - Created a new measure named "Return Rate" to calculate the ratio of quantity returned to quantity sold (format as %)
