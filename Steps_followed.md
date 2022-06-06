@@ -1,7 +1,5 @@
 # ➡️steps I followed in detail:
-
-Designed an interactive report to analyze and visualize the data.
-             
+           
              A.connected and shaped the source data
              
 1. `Updated Power BI options and settings as follows:` 
@@ -144,3 +142,34 @@ Designed an interactive report to analyze and visualize the data.
    - Created a new measure named "Revenue Target" based on a 5% lift over the previous month revenue, and format as $
       - `Revenue Target = 'MavenMarket Transactions'[Last Month Revenue]*1.05`
 ---
+                 
+                 D. Designed an interactive report to analyze and visualize the data.
+
+1. Inserted a Matrix visual to show `Total Transactions`, `Total Profit`, `Profit Margin`, and `Return Rate` by Product_Brand (on rows).
+  - Added conditional formatting to show `data bars` on the Total Transactions column, and `color scales` on Profit Margin and Return Rate.
+  - Added a visual level `Top N filter` to only show the top 30 product brands, then sort descending by Total Transactions.
+
+2. Added a KPI Card to show `Total Transactions`, with `Start of Month as the trend axis` and `Last Month Transactions as the target goal`.
+  - Updated the title to "Current Month Transactions".
+  - Created two more copies: one for `Total Profit (vs. Last month Profit)` and one for `Total Returns (vs. Last Month Returns)`.
+  - Change the `Total Returns` to `color coding to "Low is Good"`
+
+3. Added a Map visual to show `Total Transactions by store city`.
+  - Added a slicer for store country.
+  - Under the "selection controls" menu in the formatting pane, activated the "Show Select All" option.
+      - Changed the orientation in the "General" formatting menu to horizontal and resize to create a vertical stack (rather than a list)
+
+4. Added a Treemap visual to break down `Total Transactions by store country`.
+  - Pulled in `store_state` and `store_city` beneath store_country in the "Group" field to enable drill-up and drill-down functionality.
+
+5. Added a Column Chart to show `Total Revenue by week` with tittle "Weekly Revenue Trending"
+  - Added a report level filter to only show data for 1998
+
+6. Added a Gauge Chart to show `Total Revenue against Revenue Target` with title "Revenue vs. Target
+   - Added a visual level Top N filter to show the latest Start of Month
+
+7. Selected the Matrix and activated the `Edit interactions option` (in format pane) to prevent the Treemap from filtering.
+---
+
+
+10) Get creative! Practice creating new visuals, pages, or bookmarks to continue exploring the data!
