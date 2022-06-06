@@ -170,6 +170,3 @@
 
 7. Selected the Matrix and activated the `Edit interactions option` (in format pane) to prevent the Treemap from filtering.
 ---
-
-
-10) Get creative! Practice creating new visuals, pages, or bookmarks to continue exploring the data!
