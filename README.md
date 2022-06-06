@@ -21,7 +21,7 @@ Hooray! Finally, this is what final output looks like:
 
 ### ➡️ **Maven Market sales Dashboard**
 
-![Maven_Market_Sales_Insights](https://user-images.githubusercontent.com/90029373/172123828-1c7a02e5-9ebb-4ae0-b920-9df19429b8c4.png)
+![Maven_Market_Sale_Insights](https://user-images.githubusercontent.com/90029373/172160990-05c77b58-c5d4-4153-a3c5-76e95182363e.png)
 
 # 👏 Support
 
