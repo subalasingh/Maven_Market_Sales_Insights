@@ -1,4 +1,4 @@
-# ➡️steps I followed:
+# ➡️steps I followed in detail:
 
 Designed an interactive report to analyze and visualize the data.
              
@@ -114,9 +114,33 @@ Designed an interactive report to analyze and visualize the data.
       - Calculates the number of years between the current date (TODAY()) and the last remodel date --> `Years_Since_Remodel = DATEDIFF(Stores[last_remodel_date], TODAY(),YEAR)`
 
 2. `In the REPORT view, added the following measures.`
-
    - Created new measures named "Quantity Sold" and "Quantity Returned" to calculate the sum of quantity from each data table.
       - `Quantity Sold = SUM('MavenMarket Transactions'[quantity])` `Quantity Returned = SUM(Return_Data[quantity])`
    - Created new measures named "Total Transactions" and "Total Returns" to calculate the count of rows from each data table.
       - `Total Transactions = Countrows(MavenMarket Transactions)` `Total Returns = Countrows(Return_Data)`
    - Created a new measure named "Return Rate" to calculate the ratio of quantity returned to quantity sold (format as %)
+      - `Return Rate = [Quantity Returned]/[Quantity Sold]`
+   - Created a new measure named "Weekend Transactions" to calculate transactions on weekends.
+      - `Weekend1 = RELATED('Calendar'[Weekend])` --> `Weekend Transactions = CALCULATE(COUNT('MavenMarket Transactions'[transaction_date]),'MavenMarket Transactions'[Weekend1] = "Y")` 
+   - Created a new measure named "% Weekend Transactions" to calculate weekend transactions as a percentage of total transactions (format as %)
+      - `% Weekend Transactions = [Weekend Transactions]/'MavenMarket Transactions'[Total Transactions]`
+   - Created a new measure to calculate "Total Revenue" based on transaction quantity and product retail price, and format as $.
+      - `Total Revenue = SUMX('MavenMarket Transactions', 'MavenMarket Transactions'[quantity]*'MavenMarket Transactions'[Retail Price])`
+   - Created a new measure to calculate "Total Cost" based on transaction quantity and product cost, and format as $.
+      - `Total Cost = SUMX('MavenMarket Transactions', 'MavenMarket Transactions'[quantity]*'MavenMarket Transactions'[product cost price])`
+   - Created a new measure named "Total Profit" to calculate total revenue minus total cost, and format as $.
+      - `Total Profit = 'MavenMarket Transactions'[Total Revenue] - 'MavenMarket Transactions'[Total Cost]`
+   - Created a new measure to calculate "Profit Margin" by dividing total profit by total revenue (format as %).
+      - `Profit Margin = 'MavenMarket Transactions'[Total Profit]/'MavenMarket Transactions'[Total Revenue]`
+   - Created a new measure named "Unique Products" to calculate the number of unique product names in the Products table
+      - `Unique Products = DISTINCTCOUNT(Products[product_id])`
+   - Created a new measure named "YTD Revenue" to calculate year-to-date total revenue, and format as $.
+      - `YTD Revenue = Calculate('MavenMarket Transactions'[Total Revenue], DATESYTD('Calendar'[date]))`
+   - Created new measures named  "Last Month Transactions", "Last Month Revenue", "Last Month Profit", and "Last Month Returns"
+      - `Last Month Transactions = CALCULATE('MavenMarket Transactions'[Total Transactions],DATEADD('Calendar'[date],-1,MONTH))` 
+      - `Last Month Revenue = CALCULATE('MavenMarket Transactions'[Total Revenue],DATEADD('Calendar'[date],-1,MONTH))`
+      - `Last Month Profit = CALCULATE('MavenMarket Transactions'[Total Profit],DATEADD('Calendar'[date],-1,MONTH))`
+      - `Last Month Returns = CALCULATE(Return_Data[Total Returns],DATEADD('Calendar'[date],-1,MONTH))`
+   - Created a new measure named "Revenue Target" based on a 5% lift over the previous month revenue, and format as $
+      - `Revenue Target = 'MavenMarket Transactions'[Last Month Revenue]*1.05`
+---
